@@ -1,0 +1,33 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/card_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="'stylesheet" href="{%static 'css/globals'}">
+  </head>
+  <body>
+    <div class="one-service">
+
+      {% include "navbar.html" %}
+
+
+      <!-- карточка  -->
+      <div class="frame-2">
+        <img class="{{ card_data.label }}" src="{{ card_data.img }}" />
+        <div class="frame-3">
+          <div class="text-wrapper-5">{{ card_data.label }}</div>
+          <div class="frame-4">
+            <div class="text-wrapper-6">Характеристики:</div>
+            <p class="text-wrapper-7">Эталонная производительность.....{{ card_data.benchmark_performance }} эт-тов / сек.</p>
+            <div class="text-wrapper-7">Размер датасета..............................{{ card_data.dataset_size }} шт.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

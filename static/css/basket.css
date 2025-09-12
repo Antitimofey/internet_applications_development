@@ -1,0 +1,62 @@
+/* Центровка блока по вертикали */
+.inputs-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(40vh - 182px); /* высота экрана минус navbar */
+  background-color: #ffffff;
+}
+
+.inputs-form {
+  display: flex;
+  gap: 120px; /* расстояние между полями */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* расстояние между текстом и input */
+}
+
+.input-label {
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 14px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.input-field {
+  width: 100px;
+  height: 28px;
+  border: 1px solid #a7a7a7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+  outline: none;
+}
+
+
+/* ========== Блок c размером корзины внизу страницы ============= */
+/* Центровка блока внизу страницы */
+.cart-info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  position: fixed;
+  bottom: 30px; /* отступ от низа */
+  left: 0;
+}
+
+/* Прямоугольник */
+.cart-box {
+  border: 1px solid #a7a7a7;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 12px 24px;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  color: #333333;
+  text-align: center;
+}

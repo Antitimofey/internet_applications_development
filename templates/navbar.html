@@ -1,0 +1,36 @@
+{% load static %}
+
+
+<main class="navbar">
+
+
+
+    <nav class="frame">
+        <a href="/home/" class="text-wrapper">Домой</a>
+    </nav>
+
+
+    <section class="div">
+        <h1 class="n">
+            <span class="span">N.</span>
+            <span class="text-wrapper-2">ВИДЕО</span>
+        </h1>
+        <form class="finding" role="search" action="/home/">
+            <label for="search-input" class="sr-only">Поиск по названию</label>
+            <input type="search" id="search-input" class="text-wrapper-3" name="search" placeholder="Искать по названию"
+                aria-label="Поиск по названию" value="{{ request.GET.search }}" />
+            <a href="/home/" class="group" aria-label="Поиск">
+                <img class="vector" src="{% static 'svgs/magnifier.svg' %}" alt="Поиск" />
+            </a>
+        </form>
+        <div class="overlap-group-wrapper">
+            <div class="overlap-group">
+                <div class="rectangle"></div>
+                <a href="/basket/" class="group-2" aria-label="Корзина">
+                    <img class="basket" src="{% static 'svgs/basket.svg' %}" alt="" />
+                    <span class="text-wrapper-4">Корзина</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

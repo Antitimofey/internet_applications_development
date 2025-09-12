@@ -1,0 +1,82 @@
+.list-of-services {
+  display: flex;
+  flex-direction: column;
+  height: 1080px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px 28px;
+  position: relative;
+  background-color: #ffffff;
+}
+
+
+.list-of-services .grid-frame {
+  position: relative;
+  width: 907px;
+  height: 791px;
+  background-color: #ffffff;
+}
+
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.label {
+    font-weight: bold;
+    /* font-size: 18px; */
+    font-family: "Inter-Regular", Helvetica;
+    color: #000000;
+    font-size: 1.5em;
+}
+
+/* .product-card .btn {
+    width: 142px;
+    height: 40px;
+    background-color: #de231e;
+    border-radius: 5px;
+    border: none;
+    color: white;
+} */
+
+.product-card .btn {
+    width: 142px;
+    height: 40px;
+    background-color: #de231e;
+    border-radius: 5px;
+    border: none; /* Убирает стандартную границу */
+    color: white; /* Белый текст */
+    
+    /* Эти свойства нужны для ссылки */
+    display: inline-flex; /* или inline-block */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Убирает подчеркивание */
+    cursor: pointer;
+    font-family: inherit; /* Наследует шрифт */
+    font-size: inherit; /* Наследует размер шрифта */
+    box-sizing: border-box; /* Чтобы padding не ломал размеры */
+}

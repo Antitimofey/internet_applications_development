@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>N. ВИДЕО - Список сервисов</title>
+    <link rel="stylesheet" href=" {% static 'css/navbar.css' %}">
+    <!-- <link rel="stylesheet" href="{%static 'css/globals.css' %}"> -->
+    <link rel="stylesheet" href=" {% static 'css/cards_grid.css' %}">
+  </head>
+  <body>
+    <main class="list-of-services">
+
+      {% include "navbar.html" %}
+
+
+      <!-- ============= тут начинается генерация карточек ======================= -->
+      <section class="grid-frame">
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.img }}" alt="{{ product.label }}">
+                <h3>{{ product.name }}</h3>
+                <p class="label">{{ product.label }}</p>
+                <a href="/{{ forloop.counter0 }}/" class="btn">Подробнее</a>
+            </div>
+            {% endfor %}
+        </div>
+      </section>
+
+
+  </body>
+</html>

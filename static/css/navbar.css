@@ -1,0 +1,192 @@
+
+
+.navbar .text-wrapper-3 {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  }
+
+.navbar {
+  width: 100%;
+  overflow-x: hidden; /* предотвращает горизонтальную прокрутку */
+}
+
+.navbar .frame {
+  display: flex;
+  height: 37px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 8px 20px 7px 1px; /* добавил правый отступ 20px */
+  position: relative;
+  background-color: #333333;
+  box-sizing: border-box; /* важно для правильного расчета ширины */
+  max-width: 100%; /* ограничивает максимальную ширину */
+}
+
+.navbar .text-wrapper {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Regular", Helvetica;
+  color: #ffffff;
+  font-size: 16px;
+  white-space: nowrap;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 20px; /* дополнительный правый отступ для текста */
+}
+
+
+.navbar .div {
+  display: flex;
+  width: 1678px;
+  height: 45px;
+  align-items: center;
+  gap: 356px;
+  padding: 15px 130px 5px 145px;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.navbar .n {
+  position: relative;
+  width: 88px;
+  font-family: "Jim Nightshade-Regular", Helvetica;
+  font-weight: 400;
+  color: #de231e;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.navbar .span {
+  font-family: "Jim Nightshade-Regular", Helvetica;
+  font-weight: 400;
+  color: #de231e;
+  font-size: 20px;
+  letter-spacing: 0;
+}
+
+.navbar .text-wrapper-2 {
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+}
+
+.navbar .finding {
+  display: flex;
+  width: 590px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 13px 6px 5px;
+  position: relative;
+  margin-top: -2.50px;
+  margin-bottom: -2.50px;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #a7a7a7;
+}
+
+.navbar .text-wrapper-3 {
+  position: relative;
+  width: 525px;
+  height: 33px;
+  margin-top: -1.00px;
+  margin-left: -6.50px;
+  font-family: "Jomolhari-Regular", Helvetica;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.sr-only {
+  position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+white-space: nowrap;
+border: 0;
+}
+
+.navbar .group {
+  position: relative;
+  width: 33px;
+  height: 33px;
+  margin-right: -6.50px;
+  background-color: #de231e;
+  border-radius: 5px;
+  display: inline-flex; /* Для центрирования содержимого */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Убирает подчеркивание у ссылки */
+  border: none; /* Убирает границу у кнопки */
+  cursor: pointer;
+}
+
+.navbar .vector {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+  /* Убираем absolute positioning, так как теперь используем flex */
+}
+
+
+.navbar .overlap-group-wrapper {
+  position: relative;
+  width: 55px;
+  height: 47px;
+  margin-top: -3.50px;
+  margin-bottom: -3.50px;
+  margin-right: -42.00px;
+}
+
+.navbar .overlap-group {
+  position: relative;
+  height: 47px;
+  }
+  
+  .navbar .rectangle {
+    position: absolute;
+    width: 55px;
+  height: 45px;
+  top: 1px;
+  left: 0;
+  background-color: #ffffff;
+}
+
+.navbar .group-2 {
+  position: absolute;
+  width: 53px;
+  height: 47px;
+  top: 0;
+  left: 2px;
+}
+
+.navbar .basket {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 0;
+  left: 11px;
+  }
+  
+  .navbar .text-wrapper-4 {
+    position: absolute;
+    top: 28px;
+  left: 0;
+  font-family: "Jomolhari-Regular", Helvetica;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}

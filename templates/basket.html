@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>N. ВИДЕО - Список сервисов</title>
+    <link rel="stylesheet" href=" {% static 'css/navbar.css' %}">
+    <!-- <link rel="stylesheet" href="{%static 'css/globals.css' %}"> -->
+    <link rel="stylesheet" href=" {% static 'css/basket.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/cards_grid.css' %}">
+</head>
+
+<body>
+    <main class="list-of-services">
+
+        {% include "navbar.html" %}
+
+
+        <!-- Блок под навбаром -->
+        <section class="inputs-section">
+            <form class="inputs-form">
+                <div class="input-group">
+                    <label for="batch-size" class="input-label">Размер батча:</label>
+                    <!-- <input type="number" id="batch-size" class="input-field" /> -->
+                     <input type="number" id="batch-size" class="input-field" value="64" readonly disabled/>
+                </div>
+                <div class="input-group">
+                    <label for="epochs" class="input-label">Кол-во эпох:</label>
+                    <input type="number" id="epochs" class="input-field" value="50" readonly disabled/> 
+                </div>
+            </form>
+        </section>
+
+
+
+        <!-- ============= тут начинается генерация карточек ======================= -->
+        <section class="grid-frame">
+            <div class="products-grid">
+                {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.img }}" alt="{{ product.label }}">
+                    <h3>{{ product.name }}</h3>
+                    <p class="label">{{ product.label }}</p>
+                    <!-- <a href="/{{ forloop.counter0 }}/" class="btn">Рассчитать</a> -->
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
+
+        <!-- ================= Блок c размером корзины внизу страницы ============== -->
+        <section class="cart-info">
+            <div class="cart-box">
+                Товаров в вашей корзине: {{ basket_len }}
+            </div>
+        </section>
+
+
+
+</body>
+
+</html>
