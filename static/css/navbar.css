@@ -13,6 +13,8 @@
   overflow-x: hidden; /* предотвращает горизонтальную прокрутку */
 }
 
+
+/* ================== balck navbar ========================= */
 .navbar .frame {
   display: flex;
   height: 37px;
@@ -24,6 +26,7 @@
   background-color: #333333;
   box-sizing: border-box; /* важно для правильного расчета ширины */
   max-width: 100%; /* ограничивает максимальную ширину */
+  overflow: visible; /* !!! чтобы dropdown мог выпадать */
 }
 
 .navbar .text-wrapper {
@@ -40,6 +43,73 @@
 }
 
 
+/* черный navbar (фиксированная высота, не скроллится) */
+.navbar .frame {
+  display: flex;
+  height: 37px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 8px 20px 7px 1px;
+  position: relative;
+  background-color: #333333;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: visible; /* !!! чтобы dropdown мог выпадать */
+}
+
+/* контейнер */
+.navbar .user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* кнопка */
+.navbar .user-btn {
+  background: none;
+  border: none;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* выпадающий список */
+.navbar .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* сразу под кнопкой */
+  left: 0;
+  background-color: #444;
+  min-width: 220px;
+  max-height: 300px;   /* <== ограничение высоты */
+  overflow-y: auto;    /* <== скролл только внутри списка */
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* ссылки */
+.navbar .dropdown-content a {
+  color: white;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.navbar .dropdown-content a:hover {
+  background-color: #555;
+}
+
+/* показывать при наведении */
+.navbar .user-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+/* ================== white navbar ======================== */
 .navbar .div {
   display: flex;
   width: 1678px;

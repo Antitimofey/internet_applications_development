@@ -47,3 +47,38 @@ CARDS_DATA = [
         'img': 'http://172.18.0.5:9000/forlab1images/ViT-Base_16%20and%20ImageNet-1k.png'
     },
 ]
+
+
+USERS_DATA = [
+    {
+        'id': 0,
+        'first_name': 'Гость',
+        'last_name': '',
+        'chosen_models': [0, 4, 5],
+    },
+    {
+        'id': 1,
+        'first_name': 'Иван',
+        'last_name': 'Иванов',
+        'chosen_models': [1, 2, 3],
+    },
+    {
+        'id': 2,
+        'first_name': 'Виктор',
+        'last_name': 'Викторов',
+        'chosen_models': [0, 3, 5],
+    },
+    {
+        'id': 3,
+        'first_name': 'Виктор',
+        'last_name': 'Викторов',
+        'chosen_models': [1, 2, 3],
+    },
+    {
+        'id': 4,
+        'first_name': 'Виктор',
+        'last_name': 'Викторов',
+        'chosen_models': [1, 2, 3],
+    },
+]
+

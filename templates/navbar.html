@@ -6,8 +6,22 @@
 
 
     <nav class="frame">
-        <a href="/home/" class="text-wrapper">Домой</a>
+        {% url 'time-calc' as time_calc_url %}
+        {% if time_calc_url in request.path %}
+        <div class="user-dropdown">
+            <button class="user-btn">
+                Здравствуйте, {{ current_user.first_name }}
+            </button>
+            <div class="dropdown-content">
+                {% for user in users %}
+                <a href="{% url 'time-calc-idx' user_id=user.id %}">{{ user.last_name }} {{ user.first_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="text-wrapper">Домой</a>
     </nav>
+
 
 
     <section class="div">
@@ -15,6 +29,8 @@
             <span class="span">N.</span>
             <span class="text-wrapper-2">ВИДЕО</span>
         </h1>
+        {% url 'ai-market' as ai_market_url %}
+        {% if ai_market_url in request.path %}
         <form class="finding" role="search" action="/home/">
             <label for="search-input" class="sr-only">Поиск по названию</label>
             <input type="search" id="search-input" class="text-wrapper-3" name="search" placeholder="Искать по названию"
@@ -26,11 +42,12 @@
         <div class="overlap-group-wrapper">
             <div class="overlap-group">
                 <div class="rectangle"></div>
-                <a href="/basket/" class="group-2" aria-label="Корзина">
+                <a href="{% url 'time-calc-idx' user_id=current_user.id %}" class="group-2" aria-label="Корзина">
                     <img class="basket" src="{% static 'svgs/basket.svg' %}" alt="" />
                     <span class="text-wrapper-4">Корзина</span>
                 </a>
             </div>
         </div>
+        {% endif %}
     </section>
 </main>

@@ -24,7 +24,8 @@
                 <img src="{{ product.img }}" alt="{{ product.label }}">
                 <h3>{{ product.name }}</h3>
                 <p class="label">{{ product.label }}</p>
-                <a href="/{{ forloop.counter0 }}/" class="btn">Подробнее</a>
+                
+                <a href="{% url 'model-desc-idx' card_number=forloop.counter0 user_id=current_user.id %}" class="btn">Подробнее</a>
             </div>
             {% endfor %}
         </div>
