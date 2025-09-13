@@ -21,12 +21,16 @@ def render_cards_list(request, user_id:int = 0):
     # Получаем параметр поиска из GET запроса
     search_query = request.GET.get('search-model', '').strip()
 
+    # Просматриваем товары пользователя для получения размера корзины
+    active_goods = USERS_DATA[user_id]['chosen_models']
+
     # Фильтруем карточки по названию
     if search_query: filtered_data = [card_data for card_data in CARDS_DATA if search_query in card_data['label']]
     else: filtered_data = CARDS_DATA
 
     context = {
         'products': filtered_data,
+        'basket_len':len(active_goods),
         'users': USERS_DATA,
         'current_user': USERS_DATA[user_id],
     }

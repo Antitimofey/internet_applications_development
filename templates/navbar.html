@@ -44,6 +44,7 @@
         <div class="goto-time-calc-div">
             <a href="{% url 'time-calc-idx' user_id=current_user.id %}" class="time-calc-href" aria-label="Корзина">
                 <img class="basket-img" src="{% static 'svgs/basket.svg' %}" alt="" />
+                <span class="basket-count">{{ basket_len }}</span>
                 <span class="time-calc-href-text">Корзина</span>
             </a>
         </div>

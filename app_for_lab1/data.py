@@ -54,13 +54,13 @@ USERS_DATA = [
         'id': 0,
         'first_name': 'Гость',
         'last_name': '',
-        'chosen_models': [0, 4, 5],
+        'chosen_models': [0, 4, 5, 6],
     },
     {
         'id': 1,
         'first_name': 'Иван',
         'last_name': 'Иванов',
-        'chosen_models': [1, 2, 3],
+        'chosen_models': [1, 3],
     },
     {
         'id': 2,

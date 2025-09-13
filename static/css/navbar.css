@@ -185,7 +185,7 @@ border: 0;
 .navbar .goto-time-calc-div {
   position: relative;
   height: 47px;
-  }
+}
 
 .navbar .time-calc-href {
   position: absolute;
@@ -201,11 +201,27 @@ border: 0;
   height: 28px;
   top: 0;
   left: 11px;
-  }
-  
-  .navbar .time-calc-href-text {
-    position: absolute;
-    top: 28px;
+}
+
+.navbar .basket-count {
+  position: absolute;
+  top: -4px; /* чуть выше корзины */
+  right: 6px; /* прижат к правому верхнему углу */
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  width: 14px; /* 1/4 корзины (от 28px) */
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .time-calc-href-text {
+  position: absolute;
+  top: 28px;
   left: 0;
   font-family: "Jomolhari-Regular", Helvetica;
   color: #000000;
