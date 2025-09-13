@@ -10,13 +10,17 @@
         {% if time_calc_url in request.path %}
         <div class="user-dropdown">
             <button class="user-btn">
-                Здравствуйте, {{ current_user.first_name }}
+                Здравствуйте,
             </button>
-            <div class="dropdown-content">
+            <select onchange="if(this.value) window.location.href = this.value;">
                 {% for user in users %}
-                <a href="{% url 'time-calc-idx' user_id=user.id %}">{{ user.last_name }} {{ user.first_name }}</a>
+                <option value="{% url 'time-calc-idx' user_id=user.id %}"
+                data-user-id="{{ user.id }}"
+                {% if current_user.id == user.id %} selected {% endif %} >
+                    {{ user.last_name }} {{ user.first_name }}
+                </option>
                 {% endfor %}
-            </div>
+            </select>
         </div>
         {% endif %}
         <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="text-wrapper">Домой</a>
@@ -26,27 +30,22 @@
 
     <section class="div">
         <h1 class="n">
-            <span class="span">N.</span>
-            <span class="text-wrapper-2">ВИДЕО</span>
+            N.ВИДЕО
         </h1>
         {% url 'ai-market' as ai_market_url %}
         {% if ai_market_url in request.path %}
-        <form class="finding" role="search" action="/home/">
-            <label for="search-input" class="sr-only">Поиск по названию</label>
-            <input type="search" id="search-input" class="text-wrapper-3" name="search" placeholder="Искать по названию"
-                aria-label="Поиск по названию" value="{{ request.GET.search }}" />
-            <a href="/home/" class="group" aria-label="Поиск">
+        <form class="finding-model-rect" role="search" action="{% url 'ai-market-idx' user_id=current_user.id %}">
+            <input type="search" id="search-input" class="text-wrapper-3" name="search-model" placeholder="Искать по названию"
+                aria-label="Поиск по названию" value="{{ request.GET.search }}" placeholder="Поиск по названию модели" />
+            <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="group" aria-label="Поиск">
                 <img class="vector" src="{% static 'svgs/magnifier.svg' %}" alt="Поиск" />
             </a>
         </form>
-        <div class="overlap-group-wrapper">
-            <div class="overlap-group">
-                <div class="rectangle"></div>
-                <a href="{% url 'time-calc-idx' user_id=current_user.id %}" class="group-2" aria-label="Корзина">
-                    <img class="basket" src="{% static 'svgs/basket.svg' %}" alt="" />
-                    <span class="text-wrapper-4">Корзина</span>
-                </a>
-            </div>
+        <div class="goto-time-calc-div">
+            <a href="{% url 'time-calc-idx' user_id=current_user.id %}" class="time-calc-href" aria-label="Корзина">
+                <img class="basket-img" src="{% static 'svgs/basket.svg' %}" alt="" />
+                <span class="time-calc-href-text">Корзина</span>
+            </a>
         </div>
         {% endif %}
     </section>

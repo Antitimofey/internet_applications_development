@@ -19,7 +19,7 @@ def render_card(request, card_number: int, user_id: int = 0):
 
 def render_cards_list(request, user_id:int = 0):
     # Получаем параметр поиска из GET запроса
-    search_query = request.GET.get('search', '').strip()
+    search_query = request.GET.get('search-model', '').strip()
 
     # Фильтруем карточки по названию
     if search_query: filtered_data = [card_data for card_data in CARDS_DATA if search_query in card_data['label']]
