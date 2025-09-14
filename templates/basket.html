@@ -37,18 +37,17 @@
 
 
         <!-- ============= тут начинается генерация карточек ======================= -->
-        <section class="grid-frame">
-            <div class="products-grid">
                 {% for product in products %}
-                <div class="product-card">
-                    <img src="{{ product.img }}" alt="{{ product.label }}">
-                    <h3>{{ product.name }}</h3>
-                    <p class="label">{{ product.label }}</p>
-                    <!-- <a href="/{{ forloop.counter0 }}/" class="btn">Рассчитать</a> -->
+                <div class="one-service">
+                <img src="{{ product.img }}" alt="{{ product.label }}" class="model-img-oncalc">
+                    <div class="model-info-flex">
+                        <span>{{ product.label }}</span>
+                        <span>Эталонная производительность: {{ product.benchmark_performance }}</span>
+                        <span>Размер датасета: {{ product.dataset_size }}</span>
+                        <span>Время обучения (минуты): {{ product.estimate_time }}</span>
+                    </div>
                 </div>
                 {% endfor %}
-            </div>
-        </section>
 
 
 

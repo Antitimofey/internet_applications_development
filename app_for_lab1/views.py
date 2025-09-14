@@ -42,6 +42,8 @@ def render_cards_list(request, user_id:int = 0):
 def render_basket(request, user_id:int = 0):
     active_goods = USERS_DATA[user_id]['chosen_models']
     filtered_data = [card_data for i, card_data in enumerate(CARDS_DATA) if i in active_goods]
+    for card_data in filtered_data:
+        card_data['estimate_time'] = round(card_data['dataset_size'] / card_data['benchmark_performance'], 2)
     
     # Получим пользователя
     # current_user = request.GET.get('user_id')

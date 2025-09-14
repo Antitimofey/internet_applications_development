@@ -1,7 +1,6 @@
 .one-service {
   display: flex;
   flex-direction: column;
-  height: 1080px;
   align-items: center;
   gap: 10px;
   padding: 10px 0px 28px;
