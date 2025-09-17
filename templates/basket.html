@@ -14,22 +14,21 @@
 </head>
 
 <body>
-    <main class="list-of-services">
+    <main class="list-of-datasets">
 
         {% include "navbar.html" %}
 
 
         <!-- Блок под навбаром -->
-        <section class="inputs-section">
-            <form class="inputs-form">
-                <div class="input-group">
-                    <label for="batch-size" class="input-label">Размер батча:</label>
-                    <!-- <input type="number" id="batch-size" class="input-field" /> -->
-                     <input type="number" id="batch-size" class="input-field" value="64" readonly disabled/>
+        <section class="dl-model-configurator-rect">
+            <form class="dl-model-configurator-line">
+                <div class="dl-model-input-rect">
+                    <label for="batch-size" class="dl-model-input-desc">Размер батча:</label>
+                     <input type="number" id="batch-size" class="dl-model-input-field" value="64" readonly disabled/>
                 </div>
-                <div class="input-group">
-                    <label for="epochs" class="input-label">Кол-во эпох:</label>
-                    <input type="number" id="epochs" class="input-field" value="50" readonly disabled/> 
+                <div class="dl-model-input-rect">
+                    <label for="epochs" class="dl-model-input-desc">Кол-во эпох:</label>
+                    <input type="number" id="epochs" class="dl-model-input-field" value="50" readonly disabled/> 
                 </div>
             </form>
         </section>
@@ -38,9 +37,9 @@
 
         <!-- ============= тут начинается генерация карточек ======================= -->
                 {% for product in products %}
-                <div class="one-service">
+                <div class="one-dataset">
                 <img src="{{ product.img }}" alt="{{ product.label }}" class="model-img-oncalc">
-                    <div class="model-info-flex">
+                    <div class="one-dataset-text-rect">
                         <span>{{ product.label }}</span>
                         <span>Эталонная производительность: {{ product.benchmark_performance }}</span>
                         <span>Размер датасета: {{ product.dataset_size }}</span>
@@ -52,8 +51,8 @@
 
 
         <!-- ================= Блок c размером корзины внизу страницы ============== -->
-        <section class="cart-info">
-            <div class="cart-box">
+        <section class="dataset-busket-len-line">
+            <div class="dataset-busket-len-rect">
                 Товаров в вашей корзине: {{ basket_len }}
             </div>
         </section>

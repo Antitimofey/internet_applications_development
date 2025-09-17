@@ -23,10 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
 
-    path('<int:card_number>/', views.render_card, name='model-desc'),
-    path('<int:card_number>/<int:user_id>/', views.render_card, name='model-desc-idx'),
-    path('home/', views.render_cards_list, name='ai-market'),
-    path('home/<int:user_id>/', views.render_cards_list, name='ai-market-idx'),
-    path('basket/', views.render_basket, name='time-calc'),
-    path('basket/<int:user_id>/', views.render_basket, name='time-calc-idx'),
+    path('observe_dataset/<int:card_number>/', views.render_card, name='model-desc'),
+    path('observe_dataset/<int:card_number>/<int:user_id>/', views.render_card, name='model-desc-idx'),
+    path('dataset_market/', views.render_cards_list, name='ai-market'),
+    path('dataset_market/<int:user_id>/', views.render_cards_list, name='ai-market-idx'),
+    path('calculate_time/', views.render_basket, name='time-calc'),
+    path('calculate_time/<int:user_id>/', views.render_basket, name='time-calc-idx'),
 ]

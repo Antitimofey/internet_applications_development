@@ -1,13 +1,4 @@
 
-
-.navbar .text-wrapper-3 {
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  }
-
 .navbar {
   width: 100%;
   overflow-x: hidden; /* предотвращает горизонтальную прокрутку */
@@ -30,7 +21,7 @@
 
 
 /* черный navbar (фиксированная высота, не скроллится) */
-.navbar .frame {
+.navbar .black-bar {
   display: flex;
   height: 37px;
   align-items: center;
@@ -96,7 +87,7 @@
 
 
 /* ================== white navbar ======================== */
-.navbar .div {
+.navbar .white-bar {
   display: flex;
   width: 1678px;
   height: 45px;
@@ -107,7 +98,7 @@
   background-color: #ffffff;
 }
 
-.navbar .n {
+.navbar .dataset-market-logo {
   position: relative;
   width: 88px;
   font-family: "Jim Nightshade-Regular", Helvetica;
@@ -134,7 +125,7 @@
   border-color: #a7a7a7;
 }
 
-.navbar .text-wrapper-3 {
+.navbar .finding-model-input {
   position: relative;
   width: 525px;
   height: 33px;
@@ -146,6 +137,8 @@
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
+  border: none;
+  padding: 0;
 }
 
 .sr-only {
@@ -175,7 +168,7 @@ border: 0;
   cursor: pointer;
 }
 
-.navbar .vector {
+.navbar .magnifier-svg {
   width: 20px;
   height: 20px;
   filter: invert(1);

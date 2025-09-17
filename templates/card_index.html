@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="'stylesheet" href="{%static 'css/globals'}">
   </head>
-  <body>
-    <div class="one-service">
+  <body> 
+    <div class="dataset-desc">
 
       {% include "navbar.html" %}
 
 
       <!-- карточка  -->
-      <div class="frame-2">
+      <div class="dataset-card">
         <img class="{{ card_data.label }}" src="{{ card_data.img }}" />
-        <div class="frame-3">
-          <div class="text-wrapper-5">{{ card_data.label }}</div>
-          <div class="frame-4">
-            <div class="text-wrapper-6">Характеристики:</div>
-            <p class="text-wrapper-7">Эталонная производительность.....{{ card_data.benchmark_performance }} эт-тов / сек.</p>
-            <div class="text-wrapper-7">Размер датасета..............................{{ card_data.dataset_size }} шт.</div>
+        <div class="dataset-rect-all">
+          <div class="dataset-test-title">{{ card_data.label }}</div>
+          <div class="dataset-rect-info">
+            <div class="dataset-text-info">Характеристики:</div>
+            <p class="dataset-text-info">Эталонная производительность.....{{ card_data.benchmark_performance }} эт-тов / сек.</p>
+            <div class="dataset-text-info">Размер датасета..............................{{ card_data.dataset_size }} шт.</div>
           </div>
         </div>
       </div>

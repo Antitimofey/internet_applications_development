@@ -5,27 +5,27 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>N. ВИДЕО - Список сервисов</title>
+    <title>N.ВИДЕО - Список сервисов</title>
     <link rel="stylesheet" href=" {% static 'css/navbar.css' %}">
     <!-- <link rel="stylesheet" href="{%static 'css/globals.css' %}"> -->
     <link rel="stylesheet" href=" {% static 'css/cards_grid.css' %}">
   </head>
   <body>
-    <main class="list-of-services">
+    <main class="list-of-datasets">
 
       {% include "navbar.html" %}
 
 
       <!-- ============= тут начинается генерация карточек ======================= -->
-      <section class="grid-frame">
-        <div class="products-grid">
+      <section class="detaset-cards-grid-frame">
+        <div class="detaset-cards-grid">
             {% for product in products %}
-            <div class="product-card">
+            <div class="dataset-card">
                 <img src="{{ product.img }}" alt="{{ product.label }}">
                 <h3>{{ product.name }}</h3>
-                <p class="label">{{ product.label }}</p>
+                <p class="dataset-label">{{ product.label }}</p>
                 
-                <a href="{% url 'model-desc-idx' card_number=forloop.counter0 user_id=current_user.id %}" class="btn">Подробнее</a>
+                <a href="{% url 'model-desc-idx' card_number=forloop.counter0 user_id=current_user.id %}" class="show-dataset-details-btn">Подробнее</a>
             </div>
             {% endfor %}
         </div>

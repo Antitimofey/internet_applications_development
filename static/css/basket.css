@@ -1,16 +1,16 @@
-.one-service {
+.one-dataset {
     display: flex;
     margin-bottom: 10px;
 }
 
-.one-service img {
+.one-dataset img {
     max-width: 100%;
     height: 200px;
     margin-right: 50px;
 
 }
 
-.model-info-flex {
+.one-dataset-text-rect {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -25,7 +25,7 @@
 
 
 /* Центровка блока по вертикали */
-.inputs-section {
+.dl-model-configurator-rect {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,25 +33,25 @@
   background-color: #ffffff;
 }
 
-.inputs-form {
+.dl-model-configurator-line {
   display: flex;
   gap: 120px; /* расстояние между полями */
 }
 
-.input-group {
+.dl-model-input-rect {
   display: flex;
   align-items: center;
   gap: 10px; /* расстояние между текстом и input */
 }
 
-.input-label {
+.dl-model-input-desc {
   font-family: "Inter-Regular", Helvetica;
   font-size: 14px;
   color: #333333;
   white-space: nowrap;
 }
 
-.input-field {
+.dl-model-input-field {
   width: 100px;
   height: 28px;
   border: 1px solid #a7a7a7;
@@ -65,7 +65,7 @@
 
 /* ========== Блок c размером корзины внизу страницы ============= */
 /* Центровка блока внизу страницы */
-.cart-info {
+.dataset-busket-len-line {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -76,7 +76,7 @@
 }
 
 /* Прямоугольник */
-.cart-box {
+.dataset-busket-len-rect {
   border: 1px solid #a7a7a7;
   border-radius: 10px;
   background-color: transparent;

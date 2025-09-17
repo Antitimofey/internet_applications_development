@@ -5,7 +5,7 @@
 
 
 
-    <nav class="frame">
+    <nav class="black-bar">
         {% url 'time-calc' as time_calc_url %}
         {% if time_calc_url in request.path %}
         <div class="user-dropdown">
@@ -28,17 +28,17 @@
 
 
 
-    <section class="div">
-        <h1 class="n">
+    <section class="white-bar">
+        <h1 class="dataset-market-logo">
             N.ВИДЕО
         </h1>
         {% url 'ai-market' as ai_market_url %}
         {% if ai_market_url in request.path %}
         <form class="finding-model-rect" role="search" action="{% url 'ai-market-idx' user_id=current_user.id %}">
-            <input type="search" id="search-input" class="text-wrapper-3" name="search-model" placeholder="Искать по названию"
+            <input type="search" id="search-input" class="finding-model-input" name="search-model" placeholder="Искать по названию"
                 aria-label="Поиск по названию" value="{{ request.GET.search }}" placeholder="Поиск по названию модели" />
             <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="group" aria-label="Поиск">
-                <img class="vector" src="{% static 'svgs/magnifier.svg' %}" alt="Поиск" />
+                <img class="magnifier-svg" src="{% static 'svgs/magnifier.svg' %}" alt="Поиск" />
             </a>
         </form>
         <div class="goto-time-calc-div">
