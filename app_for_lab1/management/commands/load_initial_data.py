@@ -2,6 +2,7 @@
 from typing import Any
 from django.core.management.base import BaseCommand
 from django.db.models import Model
+from django.db import connection
 from django.contrib.auth import get_user_model
 from app_for_lab1.models import Dataset, AIModel, DatasetInAIModel
 from app_for_lab1.data import CARDS_DATA, USERS, AIMODELS_DATA
@@ -26,6 +27,12 @@ class Command(BaseCommand):
             obj.update({'id': idx})
             if not Dataset.objects.filter(id=idx).exists(): Dataset.objects.create(**obj); n += 1
 
+        "Исправляет последовательности для автоинкрементных полей"
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT setval('app_for_lab1_dataset_id_seq', (SELECT COALESCE(MAX(id), 1) FROM app_for_lab1_dataset))"
+            )
+
         self.stdout.write(
             self.style.SUCCESS(f'Добавлено {n} новых записей в {Dataset._meta.label}')
         )
@@ -42,6 +49,12 @@ class Command(BaseCommand):
                 'manager': User.objects.get(username=obj['manager']),
             }
             if not AIModel.objects.filter(id=idx).exists(): AIModel.objects.create(**dtc); n += 1
+
+        "Исправляет последовательности для автоинкрементных полей"
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT setval('app_for_lab1_aimodel_id_seq', (SELECT COALESCE(MAX(id), 1) FROM app_for_lab1_aimodel))"
+            )
 
         self.stdout.write(
             self.style.SUCCESS(f'Добавлено {n} новых записей в {AIModel._meta.label}')

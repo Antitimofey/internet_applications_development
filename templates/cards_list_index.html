@@ -25,7 +25,8 @@
                 <h3>{{ product.name }}</h3>
                 <p class="dataset-label">{{ product.label }}</p>
                 
-                <a href="{% url 'model-desc-idx' card_number=forloop.counter0 user_id=current_user.id %}" class="show-dataset-details-btn">Подробнее</a>
+                <a href="{% url 'model-desc-idx' card_number=forloop.counter0 user_id=current_user_id %}" class="show-dataset-details-btn">Подробнее</a>
+                <a href="{% url 'add-to-aimodel' dataset_id=forloop.counter0 user_id=current_user_id %}" class="show-dataset-details-btn">В козрину</a>
             </div>
             {% endfor %}
         </div>

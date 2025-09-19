@@ -6,7 +6,7 @@
 
 
     <nav class="black-bar">
-        {% url 'time-calc' as time_calc_url %}
+        {% url 'ai-market' as time_calc_url %}
         {% if time_calc_url in request.path %}
         <div class="user-dropdown">
             <button class="user-btn">
@@ -14,16 +14,16 @@
             </button>
             <select onchange="if(this.value) window.location.href = this.value;">
                 {% for user in users %}
-                <option value="{% url 'time-calc-idx' user_id=user.id %}"
+                <option value="{% url 'ai-market-idx' user_id=user.id %}"
                 data-user-id="{{ user.id }}"
-                {% if current_user.id == user.id %} selected {% endif %} >
+                {% if current_user_id == user.id %} selected {% endif %} >
                     {{ user.last_name }} {{ user.first_name }}
                 </option>
                 {% endfor %}
             </select>
         </div>
         {% endif %}
-        <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="text-wrapper">Домой</a>
+        <a href="{% url 'ai-market-idx' user_id=current_user_id %}" class="text-wrapper">Домой</a>
     </nav>
 
 
@@ -34,15 +34,16 @@
         </h1>
         {% url 'ai-market' as ai_market_url %}
         {% if ai_market_url in request.path %}
-        <form class="finding-model-rect" role="search" action="{% url 'ai-market-idx' user_id=current_user.id %}">
+        <form class="finding-model-rect" role="search" action="{% url 'ai-market-idx' user_id=current_user_id %}">
             <input type="search" id="search-input" class="finding-model-input" name="search-model" placeholder="Искать по названию"
                 aria-label="Поиск по названию" value="{{ request.GET.search }}" placeholder="Поиск по названию модели" />
-            <a href="{% url 'ai-market-idx' user_id=current_user.id %}" class="group" aria-label="Поиск">
+            <a href="{% url 'ai-market-idx' user_id=current_user_id %}" class="group" aria-label="Поиск">
                 <img class="magnifier-svg" src="{% static 'svgs/magnifier.svg' %}" alt="Поиск" />
             </a>
         </form>
         <div class="goto-time-calc-div">
-            <a href="{% url 'time-calc-idx' user_id=current_user.id %}" class="time-calc-href" aria-label="Корзина">
+            <a href="{% url 'time-calc-idx' user_id=current_user_id %}" class="time-calc-href" aria-label="Корзина" 
+            {% if basket_len == 0 %} style="cursor: not-allowed; pointer-events: none; opacity: 0.6;" {% endif %}>
                 <img class="basket-img" src="{% static 'svgs/basket.svg' %}" alt="" />
                 <span class="basket-count">{{ basket_len }}</span>
                 <span class="time-calc-href-text">Корзина</span>

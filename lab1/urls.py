@@ -29,4 +29,7 @@ urlpatterns = [
     path('dataset_market/<int:user_id>/', views.render_cards_list, name='ai-market-idx'),
     path('calculate_time/', views.render_basket, name='time-calc'),
     path('calculate_time/<int:user_id>/', views.render_basket, name='time-calc-idx'),
+
+    path('add-to-aimodel/<int:dataset_id>/<int:user_id>/', views.add_to_aimodel, name='add-to-aimodel'),
+
 ]
