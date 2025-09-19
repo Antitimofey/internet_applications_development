@@ -49,6 +49,56 @@ CARDS_DATA = [
 ]
 
 
+USERS = [
+    {
+        'username': 'ivanov_ivan',
+        'email': 'ivan.ivanov@example.ru',
+        'password': 'securepassword123',
+        'first_name': 'Иван',
+        'last_name': 'Иванов'
+    },
+    {
+        'username': 'petrova_maria',
+        'email': 'maria.petrova@mail.ru',
+        'password': 'strongpass456',
+        'first_name': 'Мария',
+        'last_name': 'Петрова'
+    },
+    {
+        'username': 'sidorov_alex',
+        'email': 'a.sidorov@yandex.ru',
+        'password': 'mypassword789',
+        'first_name': 'Алексей',
+        'last_name': 'Сидоров'
+    },
+    {
+        'username': 'smirnova_anna',
+        'email': 'anna.smirnova@gmail.com',
+        'password': 'anna_pass321',
+        'first_name': 'Анна',
+        'last_name': 'Смирнова'
+    },
+]
+
+AIMODELS_DATA = [
+    {
+        'status': 'DRAFT',
+        'client': 'ivanov_ivan',
+        'manager': 'ivanov_ivan',
+    },
+    {
+        'status': 'DRAFT',
+        'client': 'petrova_maria',
+        'manager': 'ivanov_ivan',
+    },
+    {
+        'status': 'DRAFT',
+        'client': 'sidorov_alex',
+        'manager': 'ivanov_ivan',
+    },
+]
+
+
 USERS_DATA = [
     {
         'id': 0,

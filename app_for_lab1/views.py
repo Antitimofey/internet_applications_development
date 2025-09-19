@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from datetime import date
 from .data import CARDS_DATA, USERS_DATA
+from .models import Dataset
 
 def hello(request):
     return render(request, 'index.html', {'current_date': date.today()})
@@ -24,9 +25,11 @@ def render_cards_list(request, user_id:int = 0):
     # Просматриваем товары пользователя для получения размера корзины
     active_goods = USERS_DATA[user_id]['chosen_models']
 
+    datasets = Dataset.objects.filter(is_active=True)
+
     # Фильтруем карточки по названию
-    if search_query: filtered_data = [card_data for card_data in CARDS_DATA if search_query in card_data['label']]
-    else: filtered_data = CARDS_DATA
+    if search_query: filtered_data = [card_data for card_data in datasets if search_query in card_data['label']]
+    else: filtered_data = datasets
 
     context = {
         'products': filtered_data,
