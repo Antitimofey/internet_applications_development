@@ -30,6 +30,12 @@
                     <label for="epochs" class="dl-model-input-desc">Кол-во эпох:</label>
                     <input type="number" id="epochs" class="dl-model-input-field" value="50" readonly disabled/> 
                 </div>
+                <div class="del-aimodel-rect">
+                    <a href="{% url 'del-aimodel' user_id=current_user_id %}" class="del-aimodel-href" aria-label="Корзина">
+                        <img class="recycle-bin-img" src="{% static 'svgs/recycle-bin.svg' %}" alt="" />
+                        <span class="del-aimodel-href-text">Удалить всё</span>
+                    </a>
+                </div>
             </form>
         </section>
 
@@ -38,7 +44,7 @@
         <!-- ============= тут начинается генерация карточек ======================= -->
                 {% for product in products %}
                 <div class="one-dataset">
-                <img src="{{ product.img }}" alt="{{ product.label }}" class="model-img-oncalc">
+                <img src="{{ product.img }}" alt="{{ product.label }}">
                     <div class="one-dataset-text-rect">
                         <span>{{ product.label }}</span>
                         <span>Эталонная производительность: {{ product.benchmark_performance }}</span>

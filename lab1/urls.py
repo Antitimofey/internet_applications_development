@@ -31,5 +31,6 @@ urlpatterns = [
     path('calculate_time/<int:user_id>/', views.render_basket, name='time-calc-idx'),
 
     path('add-to-aimodel/<int:dataset_id>/<int:user_id>/', views.add_to_aimodel, name='add-to-aimodel'),
+    path('del-aimodel/<int:user_id>/', views.del_aimodel, name='del-aimodel')
 
 ]

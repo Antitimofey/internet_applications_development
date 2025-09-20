@@ -74,7 +74,7 @@ def render_basket(request, user_id:int = 0):
 
 
 
-def add_to_aimodel(request, dataset_id: int, user_id: int = 0):
+def add_to_aimodel(request, dataset_id: int, user_id: int):
     try:
         aimodel = AIModel.objects.get(client=user_id, status='DRAFT')
     except AIModel.DoesNotExist:
@@ -90,6 +90,12 @@ def add_to_aimodel(request, dataset_id: int, user_id: int = 0):
         DatasetInAIModel.objects.create(**dct)
 
     messages.success(request, 'Операция выполнена успешно!')
+    return redirect('ai-market-idx', user_id=user_id)
+
+
+def del_aimodel(request, user_id:int):
+    AIModel.objects.filter(client=user_id, status='DRAFT').update(status=AIModel.Status.DELETED)
+
     return redirect('ai-market-idx', user_id=user_id)
 
 
