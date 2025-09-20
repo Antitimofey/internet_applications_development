@@ -51,22 +51,41 @@ def render_cards_list(request, user_id:int = 0):
 
 
 def render_basket(request, user_id:int = 0):
+    aimodel = AIModel.objects.get(client=user_id, status='DRAFT')
+
+
+    batch_size: str = request.GET.get('batch-size', '').strip()
+    epochs: str = request.GET.get('epochs', '').strip()
+
+    if batch_size: # то строка не пустая
+        batch_size = int(batch_size)
+        aimodel.batch_size=batch_size
+        aimodel.save()
+    else : batch_size = aimodel.batch_size
+    if epochs: # то строка не пустая
+        epochs = int(epochs)
+        aimodel.epochs=epochs
+        aimodel.save()
+    else : epochs = aimodel.epochs
+
+    print(type(batch_size), batch_size)
+    print(epochs)
+
+
     query = """select m.id, d.dataset_size, benchmark_performance, img from app_for_lab1_datasetinaimodel m
         join app_for_lab1_dataset d on d.id = m.dataset_id
-        where m.aimodel_id = (
-        select id from app_for_lab1_aimodel
-        where status like 'DRAFT' and client_id = %s
-    )"""
-    datasets = execute_sql_to_dicts(query, [user_id])
+        where m.aimodel_id = %s"""
+    datasets = execute_sql_to_dicts(query, [aimodel.id])
 
     for card_data in datasets:
-        card_data['estimate_time'] = round(card_data['dataset_size'] / card_data['benchmark_performance'], 2)
+        card_data['estimate_time'] = round(card_data['dataset_size'] * epochs / card_data['benchmark_performance'] / batch_size, 2)
 
     context = {
         'products': datasets,
         'basket_len':get_basket_len(user_id),
         'users': get_user_model().objects.filter(is_superuser=False),
         'current_user_id': user_id,
+        'aimodel_vars': {'batch_size': batch_size, 'epochs': epochs},
     }
 
     return render(request, 'basket.html', context=context)

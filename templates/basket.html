@@ -8,7 +8,6 @@
     <meta charset="utf-8" />
     <title>N. ВИДЕО - Список сервисов</title>
     <link rel="stylesheet" href=" {% static 'css/navbar.css' %}">
-    <!-- <link rel="stylesheet" href="{%static 'css/globals.css' %}"> -->
     <link rel="stylesheet" href=" {% static 'css/basket.css' %}">
     <link rel="stylesheet" href=" {% static 'css/cards_grid.css' %}">
 </head>
@@ -21,14 +20,17 @@
 
         <!-- Блок под навбаром -->
         <section class="dl-model-configurator-rect">
-            <form class="dl-model-configurator-line">
+            <form class="dl-model-configurator-line" method="GET" action="{% url 'time-calc-idx' user_id=current_user_id %}">
+                <button type="submit" class="apply-btn">Применить</button>
                 <div class="dl-model-input-rect">
                     <label for="batch-size" class="dl-model-input-desc">Размер батча:</label>
-                     <input type="number" id="batch-size" class="dl-model-input-field" value="64" readonly disabled/>
+                     <input type="number" id="batch-size" name="batch-size" class="dl-model-input-field"
+                        value="{{ aimodel_vars.batch_size }}" min="1" required/>
                 </div>
                 <div class="dl-model-input-rect">
                     <label for="epochs" class="dl-model-input-desc">Кол-во эпох:</label>
-                    <input type="number" id="epochs" class="dl-model-input-field" value="50" readonly disabled/> 
+                    <input type="number" id="epochs" name="epochs" class="dl-model-input-field"
+                        value="{{ aimodel_vars.epochs }}" min="1" required/>
                 </div>
                 <div class="del-aimodel-rect">
                     <a href="{% url 'del-aimodel' user_id=current_user_id %}" class="del-aimodel-href" aria-label="Корзина">
