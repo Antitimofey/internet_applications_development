@@ -11,6 +11,7 @@
 .dl-model-configurator-line {
   display: flex;
   gap: 120px; /* расстояние между полями */
+  margin-bottom: 20px;
 }
 
 .dl-model-input-rect {
@@ -65,9 +66,17 @@
 
 
 /* ================ Блок карточками датасетов =================== */
+
+.datasets-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .one-dataset {
     display: flex;
     margin-bottom: 10px;
+    width: 600px;
 }
 
 .one-dataset img {
@@ -84,20 +93,28 @@
     align-items: center;
 }
 
+.card-gpus-cnt-input-field {
+  width: 60px;
+  height: 28px;
+  border: 1px solid #a7a7a7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+  outline: none;
+}
+
 
 /* ========== Блок c размером корзины внизу страницы ============= */
 /* Центровка блока внизу страницы */
 .dataset-busket-len-line {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   width: 100%;
-  position: fixed;
-  bottom: 30px; /* отступ от низа */
-  left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-/* Прямоугольник */
 .dataset-busket-len-rect {
   border: 1px solid #a7a7a7;
   border-radius: 10px;

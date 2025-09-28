@@ -6,6 +6,8 @@
 
 
     <nav class="black-bar">
+        <!-- Выбор пользователя -->
+        <!-- 
         {% url 'ai-market' as time_calc_url %}
         {% if time_calc_url in request.path %}
         <div class="user-dropdown">
@@ -23,6 +25,7 @@
             </select>
         </div>
         {% endif %}
+        -->
         <a href="{% url 'ai-market-idx' user_id=current_user_id %}" class="text-wrapper">Домой</a>
     </nav>
 

@@ -41,7 +41,8 @@ class AIModel(models.Model):
 class DatasetInAIModel(models.Model):
     dataset = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING, related_name='binded_datasets', blank=False, null=False)
     aimodel = models.ForeignKey(AIModel, on_delete=models.DO_NOTHING, related_name='binded_aimodels', blank=False, null=False)
-    quantity = models.CharField(max_length=255)
+    gpus_cnt = models.IntegerField(validators=[MinValueValidator(1)], default=1)
+    fitting_time = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.dataset_id}-{self.aimodel_id}"

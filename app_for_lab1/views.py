@@ -53,7 +53,6 @@ def render_cards_list(request, user_id:int = 0):
 def render_basket(request, user_id:int = 0):
     aimodel = AIModel.objects.get(client=user_id, status='DRAFT')
 
-
     batch_size: str = request.GET.get('batch-size', '').strip()
     epochs: str = request.GET.get('epochs', '').strip()
 
@@ -68,17 +67,32 @@ def render_basket(request, user_id:int = 0):
         aimodel.save()
     else : epochs = aimodel.epochs
 
-    print(type(batch_size), batch_size)
-    print(epochs)
 
 
-    query = """select m.id, d.dataset_size, benchmark_performance, img from app_for_lab1_datasetinaimodel m
+
+
+    query = """select m.id, m.gpus_cnt, d.id as dataset_id, d.label, d.dataset_size, benchmark_performance, img from app_for_lab1_datasetinaimodel m
         join app_for_lab1_dataset d on d.id = m.dataset_id
-        where m.aimodel_id = %s"""
+        where m.aimodel_id = %s order by m.id"""
     datasets = execute_sql_to_dicts(query, [aimodel.id])
 
     for card_data in datasets:
-        card_data['estimate_time'] = round(card_data['dataset_size'] * epochs / card_data['benchmark_performance'] / batch_size, 2)
+        gpus_cnt: str = request.GET.get(f'gpus_cnt-{ card_data['id'] }', '').strip()
+        print(gpus_cnt)
+        datasetInAIModel = DatasetInAIModel.objects.get(id=card_data['id'])
+        if gpus_cnt: # то строка не пустая
+            gpus_cnt = int(gpus_cnt)
+            datasetInAIModel.gpus_cnt = gpus_cnt
+            datasetInAIModel.save()
+        else : gpus_cnt = datasetInAIModel.gpus_cnt
+
+        card_data['gpus_cnt'] = gpus_cnt
+        card_data['estimate_time'] = round(card_data['dataset_size'] * epochs / card_data['benchmark_performance'] /
+                                           batch_size / card_data['gpus_cnt'], 2)
+        
+        datasetInAIModel.fitting_time = card_data['estimate_time']
+        datasetInAIModel.save()
+
 
     context = {
         'products': datasets,

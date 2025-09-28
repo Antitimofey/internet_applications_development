@@ -18,32 +18,36 @@
         {% include "navbar.html" %}
 
 
-        <!-- Блок под навбаром -->
-        <section class="dl-model-configurator-rect">
-            <form class="dl-model-configurator-line" method="GET" action="{% url 'time-calc-idx' user_id=current_user_id %}">
-                <button type="submit" class="apply-btn">Применить</button>
-                <div class="dl-model-input-rect">
-                    <label for="batch-size" class="dl-model-input-desc">Размер батча:</label>
-                     <input type="number" id="batch-size" name="batch-size" class="dl-model-input-field"
-                        value="{{ aimodel_vars.batch_size }}" min="1" required/>
+        <form method="GET" action="{% url 'time-calc-idx' user_id=current_user_id %}">
+
+            <!-- Блок под навбаром -->
+            <section class="dl-model-configurator-rect">
+                <div class="dl-model-configurator-line">
+                    <button type="submit" class="apply-btn">Применить</button>
+                    <div class="dl-model-input-rect">
+                        <label for="batch-size" class="dl-model-input-desc">Размер батча:</label>
+                        <input type="number" id="batch-size" name="batch-size" class="dl-model-input-field"
+                        value="{{ aimodel_vars.batch_size }}" min="1" readonly disabled/>
+                    </div>
+                    <div class="dl-model-input-rect">
+                        <label for="epochs" class="dl-model-input-desc">Кол-во эпох:</label>
+                        <input type="number" id="epochs" name="epochs" class="dl-model-input-field"
+                        value="{{ aimodel_vars.epochs }}" min="1" readonly disabled/>
+                    </div>
+                    <div class="del-aimodel-rect">
+                        <a href="{% url 'del-aimodel' user_id=current_user_id %}" class="del-aimodel-href" aria-label="Корзина">
+                            <img class="recycle-bin-img" src="{% static 'svgs/recycle-bin.svg' %}" alt="" />
+                            <span class="del-aimodel-href-text">Удалить всё</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="dl-model-input-rect">
-                    <label for="epochs" class="dl-model-input-desc">Кол-во эпох:</label>
-                    <input type="number" id="epochs" name="epochs" class="dl-model-input-field"
-                        value="{{ aimodel_vars.epochs }}" min="1" required/>
-                </div>
-                <div class="del-aimodel-rect">
-                    <a href="{% url 'del-aimodel' user_id=current_user_id %}" class="del-aimodel-href" aria-label="Корзина">
-                        <img class="recycle-bin-img" src="{% static 'svgs/recycle-bin.svg' %}" alt="" />
-                        <span class="del-aimodel-href-text">Удалить всё</span>
-                    </a>
-                </div>
-            </form>
-        </section>
+            </section>
 
 
 
-        <!-- ============= тут начинается генерация карточек ======================= -->
+
+            <!-- ============= тут начинается генерация карточек ======================= -->
+            <div class="datasets-holder">
                 {% for product in products %}
                 <div class="one-dataset">
                 <img src="{{ product.img }}" alt="{{ product.label }}">
@@ -52,9 +56,16 @@
                         <span>Эталонная производительность: {{ product.benchmark_performance }}</span>
                         <span>Размер датасета: {{ product.dataset_size }}</span>
                         <span>Время обучения (минуты): {{ product.estimate_time }}</span>
+                        <span>
+                            <label for="gpus_cnt-{{ product.id }}" class="">Кол-во видеокарт:</label>
+                            <input type="number" id="gpus_cnt-{{ product.id }}" name="gpus_cnt-{{ product.id }}"
+                                class="card-gpus-cnt-input-field" value="{{ product.gpus_cnt }}" min="1" required/>
+                        </span>
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+        </form>
 
 
 
