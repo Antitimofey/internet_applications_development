@@ -55,7 +55,7 @@
                         <span>{{ product.label }}</span>
                         <span>Эталонная производительность: {{ product.benchmark_performance }}</span>
                         <span>Размер датасета: {{ product.dataset_size }}</span>
-                        <span>Время обучения (минуты): {{ product.estimate_time }}</span>
+                        <span>Время обучения (минуты): {{ product.fitting_time }}</span>
                         <span>
                             <label for="gpus_cnt-{{ product.id }}" class="">Кол-во видеокарт:</label>
                             <input type="number" id="gpus_cnt-{{ product.id }}" name="gpus_cnt-{{ product.id }}"
