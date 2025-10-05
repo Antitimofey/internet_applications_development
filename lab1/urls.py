@@ -16,8 +16,13 @@ Including another URLconf
 """
 from app_for_lab1 import views
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
+from lab3_api import views as api_views
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +36,14 @@ urlpatterns = [
     path('calculate_time/<int:user_id>/', views.render_basket, name='time-calc-idx'),
 
     path('add-to-aimodel/<int:dataset_id>/<int:user_id>/', views.add_to_aimodel, name='add-to-aimodel'),
-    path('del-aimodel/<int:user_id>/', views.del_aimodel, name='del-aimodel')
+    path('del-aimodel/<int:user_id>/', views.del_aimodel, name='del-aimodel'),
+
+
+    #==================== REST API ==============================
+    path('', include(router.urls)),
+    path(r'api/datasets/', api_views.DatasetList.as_view(), name='dataset-list'),
+    path(r'api/datasets/<int:pk>/', api_views.DatasetDetail.as_view(), name='dataset-detail'),
+    path(r'api/datasets/<int:pk>/put/', api_views.put, name='dataset-put'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
