@@ -41,9 +41,30 @@ urlpatterns = [
 
     #==================== REST API ==============================
     path('', include(router.urls)),
+    # Dataset URLs
     path(r'api/datasets/', api_views.DatasetList.as_view(), name='dataset-list'),
     path(r'api/datasets/<int:pk>/', api_views.DatasetDetail.as_view(), name='dataset-detail'),
-    path(r'api/datasets/<int:pk>/put/', api_views.put, name='dataset-put'),
+    path(r'api/datasets/load-img/<int:dataset_id>/', api_views.ImageUploadView.as_view(), name='dataset-img-loader'),
+
+    # DatasetInAIModel URLs
+    path(r'api/add-to-draft-aimodel/<int:dataset_id>/', api_views.add_to_draft_aimodel, name='add-to-draft-aimodel'),
+    path(r'api/dataset-in-aimodel/<int:dataset_id>/', api_views.DatasetInAIModelAPI.as_view(), name='dataset-in-aimodel'),
+
+    # AIModel URLs
+    path(r'api/aimodel/basket-icon/', api_views.AIModelBasketIcon.as_view(), name='aimodel-basket-icon'),
+    path(r'api/aimodels/', api_views.AIModelList.as_view(), name='aimodel-list'),
+    path(r'api/aimodels/<int:pk>/', api_views.AIModelDetail.as_view(), name='aimodel-detail'),
+    path(r'api/aimodel/update/', api_views.AIModelUpdate.as_view(), name='aimodel-update'),
+    path(r'api/aimodel/form/', api_views.AIModelForm.as_view(), name='aimodel-form'),
+    path(r'api/aimodel/complete-reject/<int:pk>/', api_views.AIModelCompleteReject.as_view(), name='aimodel-complete-reject'),
+    path(r'api/aimodel/delete/<int:pk>/', api_views.AIModelDelete.as_view(), name='aimodel-delete'),
+
+    # User URLs
+    path(r'api/auth/register/', api_views.RegisterView.as_view(), name='user-register'),
+    path(r'api/auth/profile/', api_views.UserProfileView.as_view(), name='user-profile'),
+    path(r'api/auth/login/', api_views.LoginView.as_view(), name='user-login'),
+    path(r'api/auth/logout/', api_views.LogoutView.as_view(), name='user-logout'),
+    
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]

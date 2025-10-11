@@ -135,3 +135,11 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MINIO configuration
+MINIO_ENDPOINT = 'localhost:9000'  # или ваш MinIO сервер
+MINIO_ACCESS_KEY = 'minio'    # стандартный логин
+MINIO_SECRET_KEY = 'minio124'    # стандартный пароль
+MINIO_USE_SSL = False
+MINIO_BUCKET_NAME = 'datasets'     # имя бакета
+MINIO_PUBLIC_URL = 'http://localhost:9000'  # для прямого доступа
