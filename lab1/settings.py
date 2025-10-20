@@ -39,7 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_for_lab1',
     'lab3_api',
+   'drf_yasg',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
+
+
+AUTH_USER_MODEL = 'lab3_api.CustomUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,6 +99,9 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+REDIS_HOST = 'localhost'    # Хост всегда строка
+REDIS_PORT = 6380           # Внешний порт из docker-compose
 
 
 # Password validation
@@ -143,3 +161,15 @@ MINIO_SECRET_KEY = 'minio124'    # стандартный пароль
 MINIO_USE_SSL = False
 MINIO_BUCKET_NAME = 'datasets'     # имя бакета
 MINIO_PUBLIC_URL = 'http://localhost:9000'  # для прямого доступа
+
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': True,  # ← ВКЛЮЧИТЕ СЕССИИ
+    'SECURITY_DEFINITIONS': {
+        'session_id': {
+            'type': 'apiKey',
+            'name': 'session_id',
+            'in': 'cookie'
+        }
+    }
+}

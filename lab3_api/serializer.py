@@ -1,13 +1,24 @@
 from app_for_lab1.models import Dataset, AIModel, DatasetInAIModel
+from .models import CustomUser
 from rest_framework import serializers
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.contrib.auth import authenticate
+from collections import OrderedDict
 import os
 
 class DatasetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dataset
         fields = ['id', 'label', 'benchmark_performance', 'dataset_size']
+
+        def get_fields(self):
+                    new_fields = OrderedDict()
+                    for name, field in super().get_fields().items():
+                        field.required = False
+                        new_fields[name] = field
+                    return new_fields 
 
 class DatasetDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -107,3 +118,19 @@ class UserLoginSerializer(serializers.Serializer):
                 raise serializers.ValidationError('Unable to log in with provided credentials.')
         else:
             raise serializers.ValidationError('Must include "username" and "password".')
+
+
+
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    is_staff = serializers.BooleanField(default=False, required=False)
+    is_superuser = serializers.BooleanField(default=False, required=False)
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'password', 'is_staff', 'is_superuser']
+    
+    def create(self, validated_data):
+        # Используем create_user для хеширования пароля
+        return CustomUser.objects.create_user(**validated_data)

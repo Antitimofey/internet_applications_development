@@ -19,10 +19,27 @@ from django.contrib import admin
 from django.urls import include, path
 
 from lab3_api import views as api_views
-from rest_framework import routers
+from rest_framework import routers, permissions
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 
 router = routers.DefaultRouter()
+
+router.register(r'user', api_views.UserViewSet, basename='user')
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Snippets API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -47,7 +64,7 @@ urlpatterns = [
     path(r'api/datasets/load-img/<int:dataset_id>/', api_views.ImageUploadView.as_view(), name='dataset-img-loader'),
 
     # DatasetInAIModel URLs
-    path(r'api/add-to-draft-aimodel/<int:dataset_id>/', api_views.add_to_draft_aimodel, name='add-to-draft-aimodel'),
+    path(r'api/add-to-draft-aimodel/<int:dataset_id>/', api_views.add_to_draft_aimodel.as_view(), name='add-to-draft-aimodel'),
     path(r'api/dataset-in-aimodel/<int:dataset_id>/', api_views.DatasetInAIModelAPI.as_view(), name='dataset-in-aimodel'),
 
     # AIModel URLs
@@ -60,11 +77,19 @@ urlpatterns = [
     path(r'api/aimodel/delete/<int:pk>/', api_views.AIModelDelete.as_view(), name='aimodel-delete'),
 
     # User URLs
-    path(r'api/auth/register/', api_views.RegisterView.as_view(), name='user-register'),
-    path(r'api/auth/profile/', api_views.UserProfileView.as_view(), name='user-profile'),
+    # path(r'api/auth/register/', api_views.RegisterView.as_view(), name='user-register'),
+    # path(r'api/auth/profile/', api_views.UserProfileView.as_view(), name='user-profile'),
     path(r'api/auth/login/', api_views.LoginView.as_view(), name='user-login'),
     path(r'api/auth/logout/', api_views.LogoutView.as_view(), name='user-logout'),
     
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+
+    ########################### Swagger ##########################
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+
+
+    # path('login/',  api_views.login_view, name='login'),
+    # path('logout/', api_views.logout_view, name='logout'),
 
 ]

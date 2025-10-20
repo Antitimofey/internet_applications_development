@@ -1,6 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
+from django.conf import settings
+from lab3_api.models import CustomUser
 
 # Create your models here.
 
@@ -28,8 +31,8 @@ class AIModel(models.Model):
     creation_datatime = models.DateTimeField(auto_now_add=True)
     formation_datetime = models.DateTimeField(blank=True, null=True)
     complition_datetime = models.DateTimeField(blank=True, null=True)
-    client = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='created_aimodels')
-    manager = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='managed_aimodels', blank=True, null=True)
+    client = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, related_name='created_aimodels')
+    manager = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, related_name='managed_aimodels', blank=True, null=True)
     batch_size = models.IntegerField(validators=[MinValueValidator(1)], default=64)
     epochs = models.IntegerField(validators=[MinValueValidator(1)], default=50)
 
