@@ -25,6 +25,13 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializer import UserRegistrationSerializer, UserProfileSerializer, UserLoginSerializer
 from .permissions import IsAdmin, IsManager
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+import requests
+
 import redis
 # Connect to our Redis instance
 session_storage = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT)
@@ -131,7 +138,11 @@ class DatasetDetail(APIView):
 
 class ImageUploadView(APIView):
     parser_classes = [MultiPartParser, FormParser]
+    authentication_classes = []
+    permission_classes = []
     
+    # @swagger_auto_schema(request_body=???)
+    @method_redis_permission_classes((IsAuthenticated,))
     def post(self, request, dataset_id: int):
         serializer = ImageUploadSerializer(data=request.data)
         
@@ -304,6 +315,20 @@ class AIModelList(APIView):
         return Response(serializer.data)
 
 
+class AIModelDraftDetail(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    @method_redis_permission_classes((IsAuthenticated,))
+    def get(self, request, format=None):
+        """GET черновой AI модели данного пользователя"""
+        user = request.user
+        aimodel = get_object_or_404(AIModel, client=user, status=AIModel.Status.DRAFT)
+        
+        serializer = AIModelDetailSerializer(aimodel)
+        return Response(serializer.data)
+
+
 class AIModelDetail(APIView):
     def get(self, request, pk, format=None):
         """GET одна запись (поля заявки + ее услуги).
@@ -377,9 +402,7 @@ class AIModelCompleteReject(APIView):
 
     @method_redis_permission_classes((IsManager,))
     def put(self, request, pk, format=None):
-        """PUT завершить/отклонить модератором. При завершить/отклонении заявки проставляется модератор и дата завершения.
-        Одно из доп. полей заявки или м-м рассчитывается (реализовать формулу представленную в лаб-2) при завершении заявки
-        (вычисление стоимости заказа, даты доставки в течении месяца, вычисления в м-м)."""
+        """PUT завершить/отклонить модератором."""
         user = request.user
         aimodel = get_object_or_404(AIModel, id=pk)
         
@@ -392,11 +415,33 @@ class AIModelCompleteReject(APIView):
         
         if action == 'complete':
             aimodel.status = AIModel.Status.COMPLETED
-            # Вычисление дополнительных полей
+            
+            # ЗАМЕНА СИНХРОННОГО РАСЧЕТА НА ВЫЗОВ АСИНХРОННОГО СЕРВИСА
             for dataset_item in aimodel.binded_aimodels.all():
-                # Расчет времени обучения на основе формулы
-                dataset_item.fitting_time = (dataset_item.dataset.dataset_size * aimodel.epochs) / (dataset_item.gpus_cnt * 1000)
-                dataset_item.save()
+                # Отправляем запрос в асинхронный сервис
+                async_data = {
+                    'pk': pk,
+                    'dataset_size': dataset_item.dataset.dataset_size,
+                    'epochs': aimodel.epochs,
+                    'gpus_cnt': dataset_item.gpus_cnt
+                }
+                
+                # Вызов асинхронного сервиса
+                try:
+                    response = requests.post(
+                        'http://localhost:8081/calculate_fitting_time',
+                        json=async_data,
+                        timeout=1  # Короткий таймаут, так как расчет асинхронный
+                    )
+                    
+                    if response.status_code != 200:
+                        print(f"Warning: Async service returned {response.status_code}")
+                        
+                except requests.exceptions.RequestException as e:
+                    print(f"Async service call failed: {e}")
+                    # Продолжаем выполнение даже если асинхронный сервис недоступен
+            
+            # Поле fitting_time будет обновлено позже асинхронным сервисом
         else:
             aimodel.status = AIModel.Status.REJECTED
         
@@ -404,15 +449,55 @@ class AIModelCompleteReject(APIView):
         aimodel.complition_datetime = datetime.now()
         aimodel.save()
         
-        if action == 'complete':
-            # Возвращаем расчетные данные
-            response_data = AIModelDetailSerializer(aimodel).data
-            return Response(response_data)
-        
         serializer = AIModelSerializer(aimodel)
         return Response(serializer.data)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class UpdateFittingTime(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def put(self, request, format=None):
+        """Обновление fitting_time от асинхронного сервиса"""
+        
+
+        print("Асинхонный сервер зовет меняяяяяяя!!!!")
+
+        # Проверка токена авторизации
+        expected_token = "secret123"
+        received_token = request.headers.get('Authorization', '').replace('Bearer ', '')
+        
+        if received_token != expected_token:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        # Получение данных из запроса
+        pk = request.data.get('pk')
+        fitting_time = request.data.get('fitting_time')
+        
+        if not pk or fitting_time is None:
+            return Response({'error': 'PK and fitting_time are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            # Находим связанные DatasetInAIModel записи
+            dataset_in_aimodel = DatasetInAIModel.objects.filter(aimodel_id=pk)
+            
+            if not dataset_in_aimodel.exists():
+                return Response({'error': 'AIModel not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+            # Обновляем fitting_time для всех связанных записей
+            for item in dataset_in_aimodel:
+                item.fitting_time = fitting_time
+                item.save()
+            
+            return Response({
+                'message': 'Fitting time updated successfully',
+                'pk': pk,
+                'fitting_time': fitting_time
+            })
+            
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class AIModelDelete(APIView):

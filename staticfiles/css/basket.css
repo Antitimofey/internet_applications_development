@@ -1,0 +1,127 @@
+
+/* Центровка блока по вертикали */
+.dl-model-configurator-rect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #ffffff;
+}
+
+.dl-model-configurator-line {
+  display: flex;
+  gap: 120px; /* расстояние между полями */
+  margin-bottom: 20px;
+}
+
+.dl-model-input-rect {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* расстояние между текстом и input */
+}
+
+.dl-model-input-desc {
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 14px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.dl-model-input-field {
+  width: 100px;
+  height: 28px;
+  border: 1px solid #a7a7a7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+  outline: none;
+}
+
+.del-aimodel-href{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+  height: 47px;
+  top: 0;
+  left: 2px;
+}
+
+.del-aimodel-rect .recycle-bin-img{
+  width: 28px;
+  height: 28px;
+}
+
+.del-aimodel-href-text {
+  top: 28px;
+  left: 0;
+  font-family: "Jomolhari-Regular", Helvetica;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+
+/* ================ Блок карточками датасетов =================== */
+
+.datasets-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.one-dataset {
+    display: flex;
+    margin-bottom: 10px;
+    width: 600px;
+}
+
+.one-dataset img {
+    max-width: 100%;
+    height: 200px;
+    margin-right: 50px;
+
+}
+
+.one-dataset-text-rect {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card-gpus-cnt-input-field {
+  width: 60px;
+  height: 28px;
+  border: 1px solid #a7a7a7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+  outline: none;
+}
+
+
+/* ========== Блок c размером корзины внизу страницы ============= */
+/* Центровка блока внизу страницы */
+.dataset-busket-len-line {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dataset-busket-len-rect {
+  border: 1px solid #a7a7a7;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 12px 24px;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 16px;
+  color: #333333;
+  text-align: center;
+}

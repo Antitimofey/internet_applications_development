@@ -70,6 +70,7 @@ urlpatterns = [
     # AIModel URLs
     path(r'api/aimodel/basket-icon/', api_views.AIModelBasketIcon.as_view(), name='aimodel-basket-icon'),
     path(r'api/aimodels/', api_views.AIModelList.as_view(), name='aimodel-list'),
+    path(r'api/aimodel/', api_views.AIModelDraftDetail.as_view(), name='aimodel-draft-detail'),
     path(r'api/aimodels/<int:pk>/', api_views.AIModelDetail.as_view(), name='aimodel-detail'),
     path(r'api/aimodel/update/', api_views.AIModelUpdate.as_view(), name='aimodel-update'),
     path(r'api/aimodel/form/', api_views.AIModelForm.as_view(), name='aimodel-form'),
@@ -88,8 +89,6 @@ urlpatterns = [
     ########################### Swagger ##########################
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
-
-    # path('login/',  api_views.login_view, name='login'),
-    # path('logout/', api_views.logout_view, name='logout'),
+    path(r'api/aimodel/update_fitting_time/', api_views.UpdateFittingTime.as_view(), name='update-fitting-time'),
 
 ]

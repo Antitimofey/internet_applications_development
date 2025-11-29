@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_for_lab1',
     'lab3_api',
-   'drf_yasg',
+    'drf_yasg',
+    'corsheaders',  # ← ДОБАВЬ ЭТУ СТРОЧКУ
 ]
 
 REST_FRAMEWORK = {
@@ -64,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', 
 ]
 
 ROOT_URLCONF = 'lab1.urls'
@@ -173,3 +175,8 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
+
+CORS_ALLOW_ALL_ORIGINS = True  # ← РАЗРЕШАЕТ ВСЕ ДОМЕНЫ
+CORS_ALLOW_CREDENTIALS = True
+

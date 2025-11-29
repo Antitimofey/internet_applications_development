@@ -6,26 +6,6 @@
 
 
     <nav class="black-bar">
-        <!-- Выбор пользователя -->
-        <!-- 
-        {% url 'ai-market' as time_calc_url %}
-        {% if time_calc_url in request.path %}
-        <div class="user-dropdown">
-            <button class="user-btn">
-                Здравствуйте,
-            </button>
-            <select onchange="if(this.value) window.location.href = this.value;">
-                {% for user in users %}
-                <option value="{% url 'ai-market-idx' user_id=user.id %}"
-                data-user-id="{{ user.id }}"
-                {% if current_user_id == user.id %} selected {% endif %} >
-                    {{ user.last_name }} {{ user.first_name }}
-                </option>
-                {% endfor %}
-            </select>
-        </div>
-        {% endif %}
-        -->
         <a href="{% url 'ai-market-idx' user_id=current_user_id %}" class="text-wrapper">Домой</a>
     </nav>
 
